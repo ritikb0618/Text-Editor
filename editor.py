@@ -70,14 +70,14 @@ tool_bar.pack(side=tk.TOP, fill=tk.X)
 # Font box
 font_tuple = tk.font.families()
 font_family = tk.StringVar()
-font_box = ttk.Combobox(tool_bar, width=30, textvariable=font_family, state='readonly')
+font_box = ttk.Combobox(tool_bar, width=30, textvariable=font_family, state='readonly', cursor="hand")
 font_box['values'] = font_tuple
 font_box.current(font_tuple.index('Arial'))
 font_box.grid(row=0, column=0, padx=5)
 
 # Size box
 size_var = tk.IntVar()
-font_size = ttk.Combobox(tool_bar, width=14, textvariable=size_var, state='readonly')
+font_size = ttk.Combobox(tool_bar, width=14, textvariable=size_var, state='readonly', cursor="hand")
 font_size['values'] = tuple(range(8, 81))
 font_size.current(4)
 font_size.grid(row=0, column=1, padx=5)
