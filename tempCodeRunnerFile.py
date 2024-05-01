@@ -1,1 +1,1 @@
-print("Font size:", current_font_size) 
+icons2/speech2.png

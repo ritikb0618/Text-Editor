@@ -118,12 +118,12 @@ align_right_btn = ttk.Button(tool_bar, image=align_right_icon, cursor="hand")
 align_right_btn.grid(row=0, column=8, padx=5)
 
 # Bold italic button
-bold_italic_icon = tk.PhotoImage(file='icons2/bold_italic.png').subsample(2, 2)
+bold_italic_icon = tk.PhotoImage(file='icons2/Bold+Italic.png').subsample(29, 29)
 bold_italic_btn = ttk.Button(tool_bar, image=bold_italic_icon, cursor="hand")
 bold_italic_btn.grid(row=0, column=9, padx=5)
 
 # Speech to text button
-speech_to_text_icon = tk.PhotoImage(file='icons2/microphone.png').subsample(2, 2)
+speech_to_text_icon = tk.PhotoImage(file='icons2/speech2.png').subsample(29, 29)
 speech_to_text_btn = ttk.Button(tool_bar, image=speech_to_text_icon, cursor="hand")
 speech_to_text_btn.grid(row=0, column=10, padx=5)
 
