@@ -10,7 +10,7 @@ main_application.wm_iconbitmap('icon.ico')
 
 ############################################## Main Menu ###################################################
 
-main_menu = tk.Menu(main_application)
+main_menu = tk.Menu()
 
 # File icons
 new_icon = tk.PhotoImage(file='icons2/new.png')
@@ -48,7 +48,7 @@ theme_choice = tk.StringVar()
 color_icons = (light_default_icon, light_plus_icon, dark_icon, red_icon, monokai_icon, night_blue_icon)
 
 color_dict = {
-    'Light Default': ('#000000', '#ffffff'),
+    'Light Default ': ('#000000', '#ffffff'),
     'Light Plus': ('#474747', '#e0e0e0'),
     'Dark': ('#c4c4c4', '#2d2d2d'),
     'Red': ('#2d2d2d', '#ffe8e8'),
@@ -84,47 +84,47 @@ font_size.grid(row=0, column=1, padx=5)
 
 # Bold button
 bold_icon = tk.PhotoImage(file='icons2/bold.png').subsample(2, 2)  
-bold_btn = ttk.Button(tool_bar, image=bold_icon, cursor="hand")
+bold_btn = ttk.Button(tool_bar, image=bold_icon , cursor="hand")
 bold_btn.grid(row=0, column=2, padx=5)
 
 # Italic button
 italic_icon = tk.PhotoImage(file='icons2/italic.png').subsample(2, 2)
-italic_btn = ttk.Button(tool_bar, image=italic_icon, cursor="hand")
+italic_btn = ttk.Button(tool_bar, image=italic_icon , cursor="hand")
 italic_btn.grid(row=0, column=3, padx=5)
 
 # Underline button
 underline_icon = tk.PhotoImage(file='icons2/underline.png').subsample(2, 2)
-underline_btn = ttk.Button(tool_bar, image=underline_icon, cursor="hand")
+underline_btn = ttk.Button(tool_bar, image=underline_icon , cursor="hand")
 underline_btn.grid(row=0, column=4, padx=5)
 
 # Font color button
 font_color_icon = tk.PhotoImage(file='icons2/font_color.png').subsample(2, 2)
-font_color_btn = ttk.Button(tool_bar, image=font_color_icon, cursor="hand")
+font_color_btn = ttk.Button(tool_bar, image=font_color_icon , cursor="hand")
 font_color_btn.grid(row=0, column=5, padx=5)
 
 # Align left button
 align_left_icon = tk.PhotoImage(file='icons2/align_left.png').subsample(2, 2)
-align_left_btn = ttk.Button(tool_bar, image=align_left_icon, cursor="hand")
+align_left_btn = ttk.Button(tool_bar, image=align_left_icon , cursor="hand")
 align_left_btn.grid(row=0, column=6, padx=5)
 
 # Align center button
 align_center_icon = tk.PhotoImage(file='icons2/align_center.png').subsample(2, 2)
-align_center_btn = ttk.Button(tool_bar, image=align_center_icon, cursor="hand")
+align_center_btn = ttk.Button(tool_bar, image=align_center_icon , cursor="hand")
 align_center_btn.grid(row=0, column=7, padx=5)
 
 # Align right button
 align_right_icon = tk.PhotoImage(file='icons2/align_right.png').subsample(2, 2)
-align_right_btn = ttk.Button(tool_bar, image=align_right_icon, cursor="hand")
+align_right_btn = ttk.Button(tool_bar, image=align_right_icon , cursor="hand")
 align_right_btn.grid(row=0, column=8, padx=5)
 
 # Bold italic button
 bold_italic_icon = tk.PhotoImage(file='icons2/Bold+Italic.png').subsample(29, 29)
-bold_italic_btn = ttk.Button(tool_bar, image=bold_italic_icon, cursor="hand")
+bold_italic_btn = ttk.Button(tool_bar, image=bold_italic_icon , cursor="hand")
 bold_italic_btn.grid(row=0, column=9, padx=5)
 
 # Speech to text button
 speech_to_text_icon = tk.PhotoImage(file='icons2/speech2.png').subsample(29, 29)
-speech_to_text_btn = ttk.Button(tool_bar, image=speech_to_text_icon, cursor="hand")
+speech_to_text_btn = ttk.Button(tool_bar, image=speech_to_text_icon , cursor="hand")
 speech_to_text_btn.grid(row=0, column=10, padx=5)
 
 # -------------------------------------&&&&&&&& End Toolbar &&&&&&&&&&& ----------------------------------
@@ -150,7 +150,6 @@ def change_font(event=None):
     current_font_family = font_family.get()
     text_editor.configure(font=(current_font_family, current_font_size))
 
-# Function to change font size
 def change_fontsize(event=None):
     global current_font_size
     current_font_size = size_var.get()
@@ -170,6 +169,7 @@ def toggle_bold(event=None):
         text_editor.tag_configure('bold', font=(current_font_family, current_font_size, 'normal'))
 
 bold_btn.configure(command=toggle_bold)
+
 
 # Italic button functionality
 def toggle_italic(event=None):
@@ -245,6 +245,45 @@ def toggle_bold_italic(event=None):
         text_editor.tag_remove('bold_italic', 'sel.first', 'sel.last')
         text_editor.tag_configure('bold_italic', font=(current_font_family, current_font_size, 'normal'))
 
+# Bold and italic buttons
+bold_btn.configure(command=toggle_bold_italic)
+italic_btn.configure(command=toggle_bold_italic)
+
+#bold and italic buttons separated 
+# Bold button functionality
+def toggle_bold(event=None):
+    text_property = tk.font.Font(font=text_editor['font'])
+    if text_property.actual()['weight'] == 'normal':
+        text_editor.tag_add('bold', 'sel.first', 'sel.last')
+        text_editor.tag_configure('bold', font=(current_font_family, current_font_size, 'bold'))
+    elif text_property.actual()['weight'] == 'bold':
+        text_editor.tag_remove('bold', 'sel.first', 'sel.last')
+        text_editor.tag_configure('bold', font=(current_font_family, current_font_size, 'normal'))
+
+bold_btn.configure(command=toggle_bold)
+
+# Italic button functionality
+def toggle_italic(event=None):
+    text_property = tk.font.Font(font=text_editor['font'])
+    if text_property.actual()['slant'] == 'roman':
+        text_editor.tag_add('italic', 'sel.first', 'sel.last')
+        text_editor.tag_configure('italic', font=(current_font_family, current_font_size, 'italic'))
+    elif text_property.actual()['slant'] == 'italic':
+        text_editor.tag_remove('italic', 'sel.first', 'sel.last')
+        text_editor.tag_configure('italic', font=(current_font_family, current_font_size, 'roman'))
+
+italic_btn.configure(command=toggle_italic)
+
+# Bold italic button functionality
+def toggle_bold_italic(event=None):
+    text_property = tk.font.Font(font=text_editor['font'])
+    if text_property.actual()['weight'] == 'normal' and text_property.actual()['slant'] == 'roman':
+        text_editor.tag_add('bold_italic', 'sel.first', 'sel.last')
+        text_editor.tag_configure('bold_italic', font=(current_font_family, current_font_size, 'bold italic'))
+    else:
+        text_editor.tag_remove('bold_italic', 'sel.first', 'sel.last')
+        text_editor.tag_configure('bold_italic', font=(current_font_family, current_font_size, 'normal'))
+
 bold_italic_btn.configure(command=toggle_bold_italic)
 
 # Speech to text functionality
@@ -292,8 +331,6 @@ text_editor.bind('<<Modified>>', update_status_bar)
 # -------------------------------------&&&&&&&& End Status Bar &&&&&&&&&&& ----------------------------------
 
 ############################################## Main Menu Functionality ###################################################
-
-url = ""
 
 # New file functionality
 def new_file(event=None):
